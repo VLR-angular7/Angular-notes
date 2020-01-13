@@ -140,6 +140,7 @@ Step 1: main.ts file gets loaded. It bootstraps(starts) the application by calli
 The main.ts is used to boostrap(starts) the application. It loads everything and controls the startup of the application. So we need
 to import the all the required modules in main.ts file.
 
+-------------------------------------***main.ts file starts***----------------------------------
 import { enableProdMode } from '@angular/core'; 
 // This module used to enable/disable production mode
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
@@ -150,7 +151,7 @@ import { environment } from './environments/environment';
 /*this library is used to manage different environment settings. This file basically contains a constant object that either 
  sets the production property to true or false.If the value in the property is true, run the enableProdMode function */
 
-if (environment.production) {    // Here we are checking whether environ
+if (environment.production) {    // Here we are checking whether environment is production or not
  enableProdMode();
 }
 
@@ -158,6 +159,8 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 
 //we are executing the boostrapModule function using platformBrowserDynamic module and pass it the name of the module(Appmodule) to be boostrapped.
 
+-----------------------------------***main.ts file ends ***---------------------------------------------------
+  
 Step 2: app.module.ts file holds an array of bootstrap components. Here, we find our root component reference.
 
 Step 3: Root component gets loaded and the template files from app.component.html become part of index.html.
