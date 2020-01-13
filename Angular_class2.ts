@@ -9,6 +9,42 @@ and for the Angular development tools(devdependencies).
 
 -------------------------------------------------------------------------------------------------------------
   
+src : This folder contains the application’s source code, resources, and configuration files.
+
+//SRC folder contents
+app : This folder contains an application’s source code and content.
+
+assets : This folder is used for the static resources required by the application, such as images.
+
+environments : This folder contains configuration files that define settings for different environments. 
+the only configuration setting is the production flag, which is set to true when the application is built for deployment.
+
+browserlist : This file is used to support the CSS processing packages that are used by the development tools.
+
+favicon.ico : This file contains an icon that browsers will display in the tab for the application. The default image is the Angular logo.
+
+index.html : This is the entry file which holds the high level container for the angular application.
+
+karma.conf.js This file contains the configuration for the Karma testing tool, which is mainly useful for running unit test cases.
+
+main.ts: As defined in angular.json file, this is the main ts file that will first run. This file bootstraps (starts) the AppModule 
+from app.module.ts , and it can be used to define global configurations.
+
+polyfills.ts This file is used to include polyfills in the project to provide support for features
+that are not available natively in some browsers, especially Internet Explorer.
+
+styles.css This file is used to define CSS styles that are applied throughout the application.
+
+tests.ts This is the configuration file for the Karma test package.
+
+tsconfig.app.json This is the configuration file for the TypeScript compiler that is used during
+development.
+
+tsconfig.spec.json This is the configuration file for the TypeScript compiler that is used during
+testing.
+
+----------------------------------------------------------------------------------------------------
+  
 .editorconfig : This file contains settings that configure text editors. You can find more info at  "http://editorconfig.org".
 
 ------------------------------------------------------------------------------------------------------------------
