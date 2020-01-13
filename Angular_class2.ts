@@ -162,5 +162,69 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 -----------------------------------***main.ts file ends ***---------------------------------------------------
   
 Step 2: app.module.ts file holds an array of bootstrap components. Here, we find our root component reference.
+/* Module in Angular refers to a place where you can group the components, directives, pipes, and services,
+which are related to the application.
+
+Angular apps are modular and to maintain modularity, we have Angular modules or you can say NgModules. 
+Every Angular app contains at least one Angular module, i.e. the root module. 
+Generally, it is named as AppModule. The root module can be the only module in a small application
+
+*/
+
+
+---------------------**App.module.ts file starts**-------------------
+  
+import { BrowserModule } from '@angular/platform-browser'; 
+import { NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+-----------------------------**App.module.ts ends**---------------
+  
+  
+declarations: The classes that are related to views and it belong to this module. 
+There are three classes of Angular that can contain view: components, directives, and pipes.
+
+imports: Modules whose classes are needed by the component of this module.
+
+providers: Services present in one of the modules which is to be used in the other modules or components.
+Once a service is included in the providers it becomes accessible in all parts of that application.
+
+bootstrap: The root component which is the main view of the application. This root module only has this property 
+and it indicates the component that is to be bootstrapped.
+
+  -------------------------------------------------------------------------------------------------------------------------
+
+
 
 Step 3: Root component gets loaded and the template files from app.component.html become part of index.html.
+  /*
+  The component called AppComponent, which is selected by the root Angular module, is defined in the app.
+component.ts file in the src/app folder */
+  
+  import { Component } from '@angular/core';
+//debugger;
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'app';
+}
+
+The properties for the @Component decorator configure its behavior. The selector property tells Angular
+that this component will be used to replace an HTML element called app-root. The templateUrl and
+styleUrls properties tell Angular that the HTML content that the component wants to present to the user
+can be found in a file called app.component.html and that the CSS styles to apply to the HTML content are
+defined in a file called app.component.css.
+  
+  
+  
+  
+  
