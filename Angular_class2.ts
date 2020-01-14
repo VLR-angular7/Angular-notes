@@ -224,7 +224,64 @@ styleUrls properties tell Angular that the HTML content that the component wants
 can be found in a file called app.component.html and that the CSS styles to apply to the HTML content are
 defined in a file called app.component.css.
   
+----------------------------------------------------------------------------------------------------------------------------------
+
+                -------------------------***Components in angular***----------------------------------------
+
+components are basic building blocks of angular application. you can divide angular application into multiple reusable components.
+
+component is basically a typescript class with HTML template, that is used to show an element on the browser screen.
+
+The angular component is consists of three 3 things such as Template, Class, and metaData
+
+
+  Component = Template + Class +Meta Data
+   
+Template :The template is used to define an interfac which the user can interact. As part of that template, you can define HTML, 
+you can also define the directives. In other words, template renders the view of the application with which the end-user 
+can interact i.e. user interface.
+
+Class: The Class is mailny used to write the business logic(typescript code) of component which is required for a template 
+to render in the browser. The class contains properties and methods. The angular class properties and variables contain the data 
+which will be used by a template to render on the web page.
+
+Meta Data : In order to make an angular class as a component, we need to decorate that class with the Component decorator. 
+Here you are adding metadata or additional data using @component decarator.
+
+
+                                              How to create a Component in Angular?
   
+If you want to create a component in angular application, then you need to follow the below 3 steps.
+
+1. First, you need to create a class and you need to export it. This is the class which will contain the business data and logic.
+2. you need to decorate your class with the @component decorator. When you decorate the class with component decorator then only your class behaves like a component.
+3. you need to import all the required libraries and modules that are required to create a component in angular.
+
+Example :app.component.ts
+
+import { Component} from '@angular/core'; // Importing the required libraries/packages(here component is library/packages)
+ 
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',   // adding meta data using @component decorator
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent{
+ title="sample App"                      // Creating the class to define business logic or data
+}
+
+
+1. selector:
+Selector defines the name of the HTML tag where this component will render.Here our component will by shown using the 
+  <app-root></app-root> tag in HTML.
+
+2.templateUrl :
+This is the view section of our component that holds our template. Template can consists of HTML TAGs and other component as well. 
+It allows us to tie logic from our component directly to a view.
+
+3.stylesUrls : The stylesUrls option is used to apply CSS on this component.
+
+
   
   
   
