@@ -1,5 +1,4 @@
-                                   ------------Adding bootstrap to Angular Application----------------
-                                   
+                                   ------------Adding bootstrap to Angular application----------------
 If you want to add bootstrap to angular application, you need to follow below steps
 1.First you need to install jquery library because bootstrap framework depends on jquery library
 2.Next you need to install bootstrap framework
@@ -33,6 +32,7 @@ Next step is you need to add bootstrap path in styles(css path) array and script
             ]
           },
         },
+  Next step is you need to stop your angular application and have to again using ngserve
 If you want to check whether bootstrap is working or not, you can add simple bootstrap button in app.component.html and test it
 
 Ex:
@@ -221,24 +221,324 @@ export class AppComponent {
 </div>
 
 -----------------------------------------------------------------------------------------------------------------------------------------
-                                   -------------*ngFor Directive----------------------            
+                                   -------------*ngFor Directive----------------------    
 
-                                
-                              
-                                                                                         
-                                                                                              
-                                                                                              
+ *ngFor is a structural directive in Angular which is very much similar to the for loop used in most of the programming languages.
+So, the NgFor directive is used to iterate over a collection of data.
 
+Ex:
+Now if you want to iterarte employee data and display in table, you can use *ngFor Directive
 
+step1. First you need to define employees array with employee details like name,Emp Id, city in component
 
+// component.ts
+import { Component } from '@angular/core';
+@Component({
+    selector: 'employee-list',
+    templateUrl: 'app/Employee/employee.Component.html',
+    styleUrls: ['app/Employee/employee.Component.css']
+})
+export class EmployeeComponent {    
+    employees: any[] = [
+        {
+            empID: 'emp101', firstName: 'Deepak', lastName: 'Kumar', city: 'HYD',
+             gender: 'Male'
+        },
+        {
+            empID: 'emp102', firstName: 'Anurag', lastName: 'kasyap', city: 'BLR',
+             gender: 'Male'
+        },
+        {
+            empID: 'emp103', firstName: 'Priyanka', lastName: 'setty', city: 'PUNE',
+             gender: 'Female'
+        },
+        {
+            empID: 'emp104', firstName: 'sivam', lastName: 'Sharma', city: 'HYD',
+             gender: 'Male'
+        },
+        {
+            empID: 'emp105', firstName: 'Mohit', lastName: 'Agarval', city: 'MUM',
+             gender: 'Male'
+        }
+    ];
+}
 
+step2. Next you need to add styles in "employee.component.scss" file to beautify table 
 
+// CSS code
+table,th,td {
+    border: 1px solid black;
+    padding:10px;
+    border-collapse: collapse;
+}
 
+step 3. Add Employee table HTML using *ngFor directive
 
-                            
+// employee.component.html
+<table>
+        <tr>
+            <th>EMP ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>City</th>
+            <th>Gender</th>
+        </tr>
+        <tr *ngFor='let employee of employees'>
+            <td>{{employee.ID}}</td>
+            <td>{{employee.firstName}}</td>
+            <td>{{employee.lastName}}</td>
+            <td>{{employee.city}}</td>
+            <td>{{employee.gender}}</td>
+        </tr>
+        <tr *ngIf="!employees || employees.length==0">
+            <td colspan="5">
+                No Students to display
+            </td>
+        </tr>
+    </table>
 
+Here ngFor directive is usually used to iterate over a collection of Data. In our case, the collection is an array of employees.
 
+*ngFor=’let employee of employees – Here the ‘employee’ is called template input variable, 
+which can be accessed by the <tr> element and any of its child elements.
 
+The ngIf structural directive displays the row “No Employees Found“ when the employees property does not exist or 
+when there is no employees in the array.
 
+---------------------------------------------------------------------------------------
 
+-----> *ngFor with index
+           
+If you want to access index of each elememt,you can get current element index using index variable. Here index starts with zero value
+
+Ex:
+// employee.component.html
+<table>
+        <tr>
+            <th>S.No</th>
+            <th>EMP ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>City</th>
+            <th>Gender</th>
+        </tr>
+<tr *ngFor='let employee of employees; let i=index'>
+           <td>{{i+1}}</td>                           // Here i value starts with '0', so you are adding 1 to index value.
+            <td>{{employee.ID}}</td>
+            <td>{{employee.firstName}}</td>
+            <td>{{employee.lastName}}</td>
+            <td>{{employee.city}}</td>
+            <td>{{employee.gender}}</td>
+        </tr>
+        <tr *ngIf="!employees || employees.length==0">
+            <td colspan="5">
+                No Students to display
+            </td>
+        </tr>
+</table>
+
+// employee.component.ts
+import { Component } from '@angular/core';
+@Component({
+    selector: 'employee-list',
+    templateUrl: 'app/Employee/employee.Component.html',
+    styleUrls: ['app/Employee/employee.Component.css']
+})
+export class EmployeeComponent {    
+    employees: any[] = [
+        {
+            empID: 'emp101', firstName: 'Deepak', lastName: 'Kumar', city: 'HYD',
+             gender: 'Male'
+        },
+        {
+            empID: 'emp102', firstName: 'Anurag', lastName: 'kasyap', city: 'BLR',
+             gender: 'Male'
+        },
+        {
+            empID: 'emp103', firstName: 'Priyanka', lastName: 'setty', city: 'PUNE',
+             gender: 'Female'
+        },
+        {
+            empID: 'emp104', firstName: 'sivam', lastName: 'Sharma', city: 'HYD',
+             gender: 'Male'
+        },
+        {
+            empID: 'emp105', firstName: 'Mohit', lastName: 'Agarval', city: 'MUM',
+             gender: 'Male'
+        }
+    ];
+}
+
+-------------------------------------------------------------------------
+----->*ngFor with even and add
+
+If you want to apply some css properties like color and background color to even and odd rows in employee table,
+ you can use the even and odd variables. you can apply css properties like color to table rows using [ngClass] directive
+
+Ex: In this example you are going to apply background color as red to "even rows" and  background color as blue to "odd rows".
+
+step1. first you need to create two different classes in "employee.component.scss " file ,
+  which can be applied to even rows and odd rows based on condition.
   
+  // employee.component.scss
+  .evenClass{
+    background-color:red;
+  }
+.oddClass{
+  background-color:blue;
+}
+
+step2 . you need to apply these two classes with [ngClass] directive in HTML
+
+syntax : [ngClass]="{className1:true,className2:false}"
+
+step3. Adding HTML with table code
+
+// employee.component.html
+<table>
+        <tr>
+            <th>S.No</th>
+            <th>EMP ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>City</th>
+            <th>Gender</th>
+        </tr>
+<tr *ngFor='let employee of employees; let i=index;let even=even;let odd=odd; [ngClass]={evenClass:even,oddClass:odd}'>
+           <td>{{i+1}}</td>                           .
+            <td>{{employee.ID}}</td>
+            <td>{{employee.firstName}}</td>
+            <td>{{employee.lastName}}</td>
+            <td>{{employee.city}}</td>
+            <td>{{employee.gender}}</td>
+        </tr>
+        <tr *ngIf="!employees || employees.length==0">
+            <td colspan="5">
+                No Employees Found
+            </td>
+        </tr>
+</table>
+
+
+
+// employee.component.ts
+import { Component } from '@angular/core';
+@Component({
+    selector: 'employee-list',
+    templateUrl: 'app/Employee/employee.Component.html',
+    styleUrls: ['app/Employee/employee.Component.css']
+})
+export class EmployeeComponent {    
+    employees: any[] = [
+        {
+            empID: 'emp101', firstName: 'Deepak', lastName: 'Kumar', city: 'HYD',
+             gender: 'Male'
+        },
+        {
+            empID: 'emp102', firstName: 'Anurag', lastName: 'kasyap', city: 'BLR',
+             gender: 'Male'
+        },
+        {
+            empID: 'emp103', firstName: 'Priyanka', lastName: 'setty', city: 'PUNE',
+             gender: 'Female'
+        },
+        {
+            empID: 'emp104', firstName: 'sivam', lastName: 'Sharma', city: 'HYD',
+             gender: 'Male'
+        },
+        {
+            empID: 'emp105', firstName: 'Mohit', lastName: 'Agarval', city: 'MUM',
+             gender: 'Male'
+        }
+    ];
+}
+
+once if you run this code, you can found all the even rows will be having background color as "red" and odd rows will be
+having background color as "blue"
+-------------------------------------------------------------------
+  ----->*ngFor with first and last
+
+If you want to apply some css properties like color and background color to first and last rows only in employee table,
+ you can use the first and last variables. you can apply css properties like color to table rows using [ngClass] directive
+
+Ex: In this example you are going to apply background color as red to "first row" and  background color as blue to "last row".
+
+step1. first you need to create two different classes in "employee.component.scss " file ,
+  which can be applied to even rows and odd rows based on condition.
+  
+  // employee.component.scss
+  .firstClass{
+    background-color:red;
+  }
+.lastClass{
+  background-color:blue;
+}
+
+step2 . you need to apply these two classes with [ngClass] directive in HTML
+
+syntax : [ngClass]="{className1:true,className2:false}"
+
+step3. Adding HTML with table code
+
+// employee.component.html
+<table>
+        <tr>
+            <th>S.No</th>
+            <th>EMP ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>City</th>
+            <th>Gender</th>
+        </tr>
+<tr *ngFor='let employee of employees; let i=index;let even=even;let odd=odd; [ngClass]={firsClass:first,lastClass:last}'>
+           <td>{{i+1}}</td>                           .
+            <td>{{employee.ID}}</td>
+            <td>{{employee.firstName}}</td>
+            <td>{{employee.lastName}}</td>
+            <td>{{employee.city}}</td>
+            <td>{{employee.gender}}</td>
+        </tr>
+        <tr *ngIf="!employees || employees.length==0">
+            <td colspan="5">
+                No Employees Found
+            </td>
+        </tr>
+</table>
+
+
+
+// employee.component.ts
+import { Component } from '@angular/core';
+@Component({
+    selector: 'employee-list',
+    templateUrl: 'app/Employee/employee.Component.html',
+    styleUrls: ['app/Employee/employee.Component.css']
+})
+export class EmployeeComponent {    
+    employees: any[] = [
+        {
+            empID: 'emp101', firstName: 'Deepak', lastName: 'Kumar', city: 'HYD',
+             gender: 'Male'
+        },
+        {
+            empID: 'emp102', firstName: 'Anurag', lastName: 'kasyap', city: 'BLR',
+             gender: 'Male'
+        },
+        {
+            empID: 'emp103', firstName: 'Priyanka', lastName: 'setty', city: 'PUNE',
+             gender: 'Female'
+        },
+        {
+            empID: 'emp104', firstName: 'sivam', lastName: 'Sharma', city: 'HYD',
+             gender: 'Male'
+        },
+        {
+            empID: 'emp105', firstName: 'Mohit', lastName: 'Agarval', city: 'MUM',
+             gender: 'Male'
+        }
+    ];
+}
+
+once if you run this code, you can found only first row will be having background color as "red" and last row will be
+having background color as "blue"
+                                                                                  
